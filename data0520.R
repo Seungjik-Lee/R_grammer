@@ -103,8 +103,18 @@ summary(lmins2)
 lmins3 <- step(lmins2, direction = "backward")
 summary(lmins3)
 
-# diamonds dataset을 다중회귀분석 처리
+# 연습문제
+# diamonds dataset을 다중회귀분석으로 처리
 
+library(psych)
+
+pairs.panels(diamonds)
+
+# -1 ~ +1
+cor(scaMatrix)
+
+lmins <- lm(charges~age+children+bmi+sex+smoker+region,
+            data=csvIns)
 
 
 

@@ -3,6 +3,7 @@ library(ggplot2)
 
 api <- "http://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getMinuDustFrcstDspth"
 apiKey <- "OdXDUPZk1H5uGX4y0vqwIi2zUsKo6rJTaf7n87m0lLKmr2fr1D1156FYBO1thOiWeZ5sL3u078PqfRmambn9rQ%3D%3D"
+
 returnType <- "json"
 numOfRows <- 100
 pageNo <- 1
@@ -11,10 +12,21 @@ InformCode <- "PM10"
 url <- paste(api, "?serviceKey=", apiKey, "&returnType=", returnType, "&numOfRows=", numOfRows, "&pageNo=",  pageNo, "&InformCode=", InformCode, sep = "")
 url
 
-jsonData <- fromJSON(url)
+returnType <- "json"
+numOfRows <- 100
+pageNo <- 1
+InformCode <- "PM10"
+
+url <- paste(api,"?serviceKey=",apikey,"&returnType=",returnType,
+             "&numOfRows=",numOfRows,"&pageNo=",pageNo,"&InformCode=",InformCode,
+             sep="")
+url
+jsonData <-fromJSON(url)
 str(jsonData)
 
-df <- data.frame(jsonData$response$body$items$informCode, jsonData$response$body$items$dataTime)
+df<-data.frame(jsonData$response$body$items$informCode,
+               jsonData$response$body$items$dataTime)
+
 df
 
 ggplot(data=df, aes(x=dataTime, y=informCode)) + 
